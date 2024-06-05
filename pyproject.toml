@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "openpy-ts-clu"
+version = "0.1.0"
+description = "Library for time series clustering"
+authors = ["jlara6 <jlara@iee.unsj.edu.ar>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
