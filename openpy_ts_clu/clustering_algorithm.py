@@ -14,13 +14,11 @@ pd.options.mode.chained_assignment = None  # default='warn'
 import tqdm
 from scipy import stats
 from tqdm.autonotebook import tqdm
-from .data_preprocessing import moving_window_mean
 from sklearn.cluster import KMeans
 from tslearn.clustering import TimeSeriesKMeans
-from tslearn.barycenters import euclidean_barycenter, dtw_barycenter_averaging
+from tslearn.barycenters import euclidean_barycenter
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_harabasz_score
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, mean_absolute_percentage_error
 from sklearn.manifold import TSNE, MDS
 from typing import List, Union
 import seaborn as sns
@@ -60,11 +58,8 @@ def dict_clu_models():
     return dict_models
 
 
-def scenarios():
-    pass
 
-
-class clustering_ts:
+class clustering_kmeans:
 
     def __init__(
             self,

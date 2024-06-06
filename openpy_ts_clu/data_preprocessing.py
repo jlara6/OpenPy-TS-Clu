@@ -29,54 +29,6 @@ def _clean_file(df):
     return df[list(df.columns)[-2:]]
 
 
-def dimensionality_reduction(df):
-    df_clean = pd.DataFrame()  # datasets frame vacío.
-    for h in range(0, 24):  # h va a ieterar 24 veces representando las 24 horas del día.
-        df_clean = pd.DataFrame()
-        k = [h]
-        Hora_Dia = df[df['hour'].isin(k)]  # filtramos por hora del dia
-        Hora_Dia_Acumu = Hora_Dia.groupby(['year', 'mount', 'Dia_M', 'hour'])[
-            'E_Activa(Wh)'].sum()  # Sumar las mediciones de los periodos de 15 min entre horas
-        Hora_Dia_Acum_ = pd.DataFrame(pd.DataFrame(Hora_Dia_Acumu))  # convertir a datasets frame a dataframe
-        Hora_Dia_Acum_ = Hora_Dia_Acum_.reset_index(drop=True)  # se elimina niveles de índices
-        vector = Hora_Dia_Acum_['E_Activa(Wh)']
-        name_colum = '$%d$' % h  # nombre de la columna
-        df_clean = df_clean.copy()
-        df_clean[name_colum] = vector  # coloca el vector hora h en la columna h de df_celan
-        df_clean = pd.concat([df_clean, df_clean], axis=1)  # adjuntos el nuevo vector de las horas Al dataframe
-        df_clean = df_clean.dropna(how='any')  # Elimino datos null de df
-        df_clean.columns = range(
-            df_clean.shape[1])  # cambiamos el tipo de datos de los nombres de las columnas para redireccionar luego
-
-    return df_clean
-
-
-class read_BBDD:
-
-    def multiple_user_files(
-            self,
-            file_folder_path: str = None,
-            save_folder_path: str = None
-    ):
-        os.chdir(file_folder_path)
-        filelist = glob.glob('*.xlsx')  # Muestra una lista de todos los archivos excel dentro del directorio
-        i = 0
-        df_user_Max_W = pd.DataFrame()
-        df_user_W = pd.DataFrame()
-        for filename in filelist:
-            print(filename)
-            data_user = pd.read_excel(filename)
-            user = _user_id(data_user)
-            data_user = _clean_file(data_user)
-            df_aux1, df_aux2 = pd.DataFrame(), pd.DataFrame()
-            df_aux1[user] = data_user[data_user.columns[0]]
-            df_aux2[user] = data_user[data_user.columns[1]]
-            df_user_Max_W = pd.concat([df_user_Max_W, df_aux1], axis=1)
-            df_user_W = pd.concat([df_user_W, df_aux2], axis=1)
-        df_user_Max_W.to_csv(f'{save_folder_path}\\alluser_Max_W.csv')
-        df_user_W.to_csv(f'{save_folder_path}\\alluser_W.csv')
-
-
 class scenarios:
 
     @staticmethod
@@ -304,13 +256,3 @@ def moving_window_mean(
                         if np.isnan(data[row, col]):
                             data[row, col] = data[row: row + n_future, col].mean()
         aux += 1
-
-
-class segmentation_analysis:
-
-    def add_discrete_variables(self, season, mount, type, ):
-        pass
-
-
-class dimensionality_reduction:
-    pass

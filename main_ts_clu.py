@@ -1,4 +1,4 @@
-from openpy_ts_clu import clustering_ts, scenarios
+from openpy_ts_clu import clustering_kmeans, scenarios
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -6,9 +6,11 @@ import matplotlib.pyplot as plt
 
 path_AMI = r"G:\Mi unidad\UNSJ-IEE\Estudio PhD REID\Avances de Tesis PhD\3. Pseudomedicones para EESD\Data BBDD\London_Low_Carbon\dataset_imputation_30min.csv"
 dict_sce = scenarios.dictionary()
-dict_sce['seasons'] = ['Summer']
-dict_sce['day_name'] = ['Monday']
-#dict_sce['day_type'] = ['working']
+dict_sce['seasons'] = ['Summer']  # ['Summer', 'Fall', 'Winter', 'Spring']
+dict_sce['month'] = ['January']  # ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+dict_sce['year'] = [2013]  # [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
+dict_sce['day_name'] = ['Monday']  # ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+dict_sce['day_type'] = ['working']  # ['working', 'non-working']
 
 df_multi = scenarios.multiple_users(
         file_path=path_AMI,
@@ -17,24 +19,7 @@ df_multi = scenarios.multiple_users(
         variable='energy(kWh/hh)'
     )
 
-# models clustering
-kmeans = 1
-dict_models = {
-    'KMeans': True,
-    # 'MeanShift': True,  # OK
-    # 'DBSCAN': True,  # OK
-    # 'MiniBatchKMeans': True,  # OK
-    # 'Birch': True,  # OK
-    # 'GaussianMixture': True,  # OK
-    # 'OPTICS': True,  # OK
-    # 'AffinityPropagation': True,  # OK
-    # 'Agglomerative': True,  # OK
-    # 'Spectral': True,  # OK
-    # 'SOM': True,
-    # 'TSKMeans': False
-}
-
-model = clustering_ts(
+model = clustering_kmeans(
     model='KMeans',
     users=None,
     metric='dtw',
