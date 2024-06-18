@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 # New files
 from openpy_ts_clu.clustering_algorithm import clustering_kmeans
 from openpy_ts_clu.data_preprocessing import scenarios

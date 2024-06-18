@@ -568,9 +568,9 @@ class clustering_kmeans:
             dict_index['Davies Bouldin'].append(davies_bouldin_score(data, clu_labels))
             dict_index['Calinski Harabasz'].append(calinski_harabasz_score(data, clu_labels))
         else:
-            dict_index['Silhouette'].append(np.NaN)
-            dict_index['Davies Bouldin'].append(np.NaN)
-            dict_index['Calinski Harabasz'].append(np.NaN)
+            dict_index['Silhouette'].append(np.nan)
+            dict_index['Davies Bouldin'].append(np.nan)
+            dict_index['Calinski Harabasz'].append(np.nan)
         return dict_index
 
     def _run_optimal_number_of_clusters(
