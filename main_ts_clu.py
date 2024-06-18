@@ -1,4 +1,5 @@
-from openpy_ts_clu import clustering_kmeans, scenarios
+from openpy_ts_clu import clustering_kmeans, scenarios, example
+
 import numpy as np
 import pandas as pd
 import seaborn as sns

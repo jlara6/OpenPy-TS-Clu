@@ -1,12 +1,7 @@
 OpenPy-TS-Clu
 ===========================================
-OpenPy-TS-Clu es una aplicación que permite mediante técnicas de minería de datos obtener modelos y patrones representativos de grupos de usuarios
-consumidores de energía eléctrica, a partir de una infraestructura avanzada de medición inteligente.
-Siendo su principal función la clasificación en grupos de usuarios que consumen la energía de forma similar
-y definir una curva de carga típica que caracterice al grupo. Desarrollada en el marco del proyecto
-OpenREiD (c) (Software integral de simulación y optimización de redes eléctricas de distribución), del
-Instituto de Energía Eléctrica (IEE), UNSJ - CONICET, San Juan - Argentina.
-Versión
+OpenPy-TS-Clu is a Python library based on the development of [OpenTC-AMI](https://sourceforge.net/projects/opentc-ami/) that allows using data mining techniques to obtain models and patterns representative of user groups.
+
 ## Installation
 
 With pip
