@@ -23,6 +23,7 @@ First, in the IDE (Integrated Development Environment) of preference, we import 
 ```Python
 from openpy_ts_clu import clustering_kmeans, scenarios
 ```
+Run or view the example in the [main_ts_clu.py](https://github.com/jlara6/OpenPy-TS-Clu/blob/main/main_ts_clu.py) file or Notebook [main_clu.ipynb](https://github.com/jlara6/OpenPy-TS-Clu/blob/main/main_clu.ipynb).
 
 ## License
 
