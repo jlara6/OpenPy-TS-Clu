@@ -31,7 +31,12 @@ def change_dict_key(dictionary, old_key, new_key, default_value=None):
     dictionary[new_key] = dictionary.pop(old_key, default_value)
 
 
-def set_tittle_cluster(key, gamma):
+def set_tittle_cluster(key):
+    """
+    Set the title of the cluster
+    :param key: key of the cluster
+    :return:
+    """
     if key == 'centroid':
         return 'Centroid'
     if key == 'mean':
@@ -71,6 +76,16 @@ class clustering_kmeans:
             seed: int = 123,
             df_sce: pd.DataFrame = None,
     ):
+        """
+        class to content the clustering algorithm
+        :param users: name of the users
+        :param model: model to use
+        :param metric: metric to use
+        :param type_dr: type of dimensional reduction
+        :param n_components: number of components
+        :param seed: seed of the model
+        :param df_sce: dataframe with the data to use
+        """
 
         if users is None:
             users = df_sce.columns[:-11]
@@ -89,6 +104,7 @@ class clustering_kmeans:
             self,
             op: int = 1
     ):
+
         dict_sce = dict()
         df_users_mean = pd.DataFrame()
         df_user = pd.DataFrame()
@@ -266,6 +282,17 @@ class clustering_kmeans:
             inv_scaler: bool = True,
             parameters_clu: dict = None
     ):
+        """
+        Train the clustering model with the parameters given
+        :param n_clusters: number of clusters to use
+        :param num_iteration: number of iterations
+        :param points_2d: plot the points in 2d
+        :param view_clu: plot the clusters view
+        :param acum_bar: plot acumulated bar
+        :param inv_scaler: inverse the scaler
+        :param parameters_clu: parameters of the clustering model in development
+        :return:
+        """
         if parameters_clu is not None:
             parameters = parameters_clu
         else:
@@ -365,6 +392,27 @@ class clustering_kmeans:
             plt_all_graphs: bool = False,
             parameters_clu: dict = None
     ):
+        """
+        Extract the clusters baricentres and plot the results
+        :param n_clusters: number of clusters to use
+        :param max_iter: maximum number of iterations
+        :param tol: tolerance of the model (development)
+        :param gamma: gamma of the model (development)
+        :param verbose: view the results (development)
+        :param all_barycenters: get all the barycenters
+        :param centroid: boolean to use the centroid
+        :param mean: boolean to use the mean
+        :param euclidean: boolean to use the euclidean
+        :param plt_n_cluster: plot the number of clusters
+        :param plt_barycenters: plot the barycenters
+        :param plt_summary: plot the summary
+        :param plt_clusters: plot the clusters
+        :param plt_pct_clu: plot the percentage of clusters
+        :param plt_count_clu: plot the count of clusters
+        :param plt_all_graphs: plot all the graphs together
+        :param parameters_clu: parameters of the clustering model in development
+        :return:
+        """
         ## Parameters - barycenters
         bool_bar = {
             'centroid': centroid,
@@ -621,7 +669,7 @@ class clustering_kmeans:
                         if index == n_clusters - 1:
                             ax[index].set_xlabel('Number of measurements')
                         if index == 0:
-                            myTitle = f"Cluster with {set_tittle_cluster(key, gamma)}"
+                            myTitle = f"Cluster with {set_tittle_cluster(key)}"
                             ax[index].set_title(myTitle, loc='center', wrap=True)
             plt.legend()
             if label is None:
@@ -643,7 +691,7 @@ class clustering_kmeans:
                         if index == n_clusters - 1:
                             ax[index, n].set_xlabel('Number of measurements')
                         if index == 0:
-                            myTitle = f"Cluster with {set_tittle_cluster(key, gamma)}"
+                            myTitle = f"Cluster with {set_tittle_cluster(key)}"
                             ax[index, n].set_title(myTitle, loc='center', wrap=True)
                     n += 1
             plt.legend()
@@ -949,7 +997,7 @@ class fx_clu_plots:
                     else:
                         plt.plot(dict_bar['clusters'][plt_n_cluster], "k-", alpha=0.2)
                         plt.plot(dict_bar[key][plt_n_cluster], c='r')
-                        plt.title(set_tittle_cluster(key, gamma), loc='left', y=0.85, x=0.02, fontsize='medium')
+                        plt.title(set_tittle_cluster(key), loc='left', y=0.85, x=0.02, fontsize='medium')
                         if label is None:
                             plt.suptitle(f'Cluster Series - Cluster No. {plt_n_cluster}')
                         else:
@@ -963,7 +1011,7 @@ class fx_clu_plots:
                     else:
                         ax[n].plot(dict_bar['clusters'][plt_n_cluster], "k-", alpha=0.2)
                         ax[n].plot(dict_bar[key][plt_n_cluster], c='r')
-                        ax[n].set_title(set_tittle_cluster(key, gamma), loc='left', y=0.85, x=0.02, fontsize='medium')
+                        ax[n].set_title(set_tittle_cluster(key), loc='left', y=0.85, x=0.02, fontsize='medium')
                         n += 1
                 if label is None:
                     fig_1.suptitle(f'Cluster Series - Cluster No. {plt_n_cluster}')
@@ -979,7 +1027,7 @@ class fx_clu_plots:
                     if (key == 'dataset') or (key == 'clusters'):
                         pass
                     else:
-                        ax[i].plot(dict_bar[key][i], label=set_tittle_cluster(key, gamma))
+                        ax[i].plot(dict_bar[key][i], label=set_tittle_cluster(key))
                 if label is None:
                     ax[i].set_title(f"Summary to Cluster Nro. {i}")
                 else:

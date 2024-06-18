@@ -62,9 +62,17 @@ class scenarios:
             dict_scenario: dict = None,
             id_col_users:  str = 'nroserie',
             variable: str = 'kW',
-            col_user: str = None,
-            col_meas: list = None
     ):
+        """
+        This function reads a csv file with the following columns:
+        :param file_path: path to the csv file
+        :param index_col: index column
+        :param parse_dates: boolean to parse dates
+        :param dict_scenario: dictionary with the following keys
+        :param id_col_users: id column for users
+        :param variable: variable to be analyzed
+        :return:
+        """
         data = pd.read_csv(
             file_path,
             index_col=index_col,
@@ -138,6 +146,16 @@ class scenarios:
             parse_dates: bool = True
 
     ):
+        """
+        This function reads a csv file with the following columns
+        :param file_path: path to the csv file
+        :param dict_scenario: dictionary with the following keys
+        :param id_user: id column for user to select
+        :param only_df: boolean to return only the dataframe
+        :param index_col: number of the index column
+        :param parse_dates: boolean to parse dates
+        :return:
+        """
         if dict_scenario is not None:
             only_df = False
         data = pd.read_csv(
@@ -194,6 +212,15 @@ def moving_window_replace(
         previous: bool = None,
         back: bool = None
 ):
+    """
+    This function replaces NaN values in a time series using a moving window
+    :param data: data to be analyzed in a numpy array
+    :param res_min: time resolution in minutes
+    :param n_days: number of days to be considered in the moving window
+    :param previous: boolean to consider the previous values
+    :param back: boolean to consider the back values
+    :return:
+    """
     if previous is None and back is None:
         previous = True
     window = (24 * 60) / res_min
@@ -232,6 +259,15 @@ def moving_window_mean(
         n_past: bool = None,
         n_future: bool = None,
 ):
+    """
+    This function replaces NaN values in a time series using a moving window
+    :param data: data to be analyzed in a numpy array
+    :param n_hours: number of hours to be considered in the moving window
+    :param res_min: resolution in minutes
+    :param n_past: boolean to consider the past values
+    :param n_future: boolean to consider the future values
+    :return:
+    """
     aux = 0
     if n_hours is None:
         n = 1
