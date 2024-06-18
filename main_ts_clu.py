@@ -4,7 +4,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-path_AMI = r"G:\Mi unidad\UNSJ-IEE\Estudio PhD REID\Avances de Tesis PhD\3. Pseudomedicones para EESD\Data BBDD\London_Low_Carbon\dataset_imputation_30min.csv"
 dict_sce = scenarios.dictionary()
 dict_sce['seasons'] = ['Summer']  # ['Summer', 'Fall', 'Winter', 'Spring']
 dict_sce['month'] = ['January']  # ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -13,7 +12,7 @@ dict_sce['day_name'] = ['Monday']  # ['Monday', 'Tuesday', 'Wednesday', 'Thursda
 dict_sce['day_type'] = ['working']  # ['working', 'non-working']
 
 df_multi = scenarios.multiple_users(
-        file_path=None,
+        # file_path=None,
         dict_scenario=dict_sce,
         id_col_users='LCLid',
         variable='energy(kWh/hh)'
