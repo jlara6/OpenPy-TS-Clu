@@ -11,6 +11,7 @@ import pandas as pd
 import numpy as np
 from .utils import add_time_features
 from .prepare_data import get_scenarios_for_time_features
+from .BBDD.load_example import example
 
 
 def _user_id(data):
@@ -56,7 +57,7 @@ class scenarios:
         return dict_sce
     def multiple_users(
             self,
-            file_path,
+            file_path: str = None,
             index_col: int = 0,
             parse_dates: bool = True,
             dict_scenario: dict = None,
@@ -73,11 +74,14 @@ class scenarios:
         :param variable: variable to be analyzed
         :return:
         """
-        data = pd.read_csv(
-            file_path,
-            index_col=index_col,
-            parse_dates=parse_dates
-        )
+        if file_path is None:
+            data = example()
+        else:
+            data = pd.read_csv(
+                file_path,
+                index_col=index_col,
+                parse_dates=parse_dates
+            )
 
         data = pd.pivot_table(
             data=data,

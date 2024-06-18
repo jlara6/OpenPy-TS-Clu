@@ -13,7 +13,7 @@ dict_sce['day_name'] = ['Monday']  # ['Monday', 'Tuesday', 'Wednesday', 'Thursda
 dict_sce['day_type'] = ['working']  # ['working', 'non-working']
 
 df_multi = scenarios.multiple_users(
-        file_path=path_AMI,
+        file_path=None,
         dict_scenario=dict_sce,
         id_col_users='LCLid',
         variable='energy(kWh/hh)'
